@@ -4,7 +4,10 @@ function stacks() {
   /**
   * Stacks script
   */
-  var $navItems = $('.nav-items a')
+  var $navItems = $('.nav-items a');
+  var $pageStack = $('.page.stack');
+  var contentContainerClass = 'page-content';
+  var contentDirectory = 'content-partials/';
 
   //initialize SnapJS
   var snapper = new Snap({
@@ -16,6 +19,8 @@ function stacks() {
     $navItems.on('click', function(e) {
       e.preventDefault();
       _href = $(this).attr('href');
+      $navItems.each(function(){$(this).removeClass('active');});
+      $(this).addClass('active');
       // change the url without a page refresh and add a history entry.
       // for more about the history API: (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history)
       history.pushState(null, null, _href);
@@ -25,8 +30,13 @@ function stacks() {
   } else { } //regular page loads
 
   function handleContentChange(_href) {
-    console.log( _href );
-    console.log( history );
+    var newPageContent = $('<div/>',{ 'class':contentContainerClass })
+    .load(contentDirectory + _href, function() { // load the contents of whatever href is
+      //add the content "behind" the current page
+      $pageStack.prepend(newPageContent);
+      //handle the animation reveal
+      $pageStack.find('.'+contentContainerClass).last().fadeOut(500,function(){$(this).remove();});
+    });
   }
 
 }
