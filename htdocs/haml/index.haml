@@ -1,0 +1,69 @@
+!!! 5
+<!--[if lt IE 7]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IEMobile]><html lang="en" class="no-js iemobile"> <![endif]-->
+
+
+<!--[if gt IE 8]><!-->
+%html.no-js{ :lang => "en" }
+  <!--<![endif]-->
+  %head
+    %meta{ :charset => "utf-8" }/
+
+    -# Always force latest IE rendering engine (even in intranet) & Chrome Frame
+    -# Remove this if you use the .htaccess
+    %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
+    %meta{ :name => "viewport", :content => "width=device-width,initial-scale=1.0,maximum-scale=1.0" }/
+
+    %title
+      Stacks prototype
+
+    %link{ :href => "stylesheets/app.css", :media => "all", :rel => "stylesheet" }/
+    %script{ :src => "javascripts/vendor/custom.modernizr.js" }
+    :css
+      .nav-items li { display:inline-block; }
+      .nav-items li a { display:block; padding:10px 20px; color: black; text-decoration: none; }
+      .nav-items li a:hover { background-color: darkgray; color: white; }
+
+
+  %body
+  .stacks
+    .stack.background
+      .background-content
+        .sample-background{ :style => "width: 1024px; height: 768px; background: url(http://placekitten.com/200/200) repeat 0 0;" }
+    .stack.obscured
+      .obscured-content
+        .sample-drawer.left{ :style => "display:block; position: absolute; background-color: rgba(0,0,0,.65); width:266px; height: 100%; top: 0; right: auto; bottom: 0; left: 0;"}
+          %p{ :style => "margin-top: 200px; color: white;" } Drawer Stack Left Content
+        .sample-drawer.right{ :style => "display:block; position: absolute; background-color: rgba(0,0,0,.65); width:266px; height: 100%; top: 0; right: 0; bottom: 0; left: auto;"}
+          %p{ :style => "margin-top: 200px; color: white;" } Drawer Stack Right Content
+    .stack.page
+      .page-content
+        .sample-content-wrapper{ :style => "height:4000px; background-color:lightgray;" }
+          %h1{ :style => "margin-top:200px;width:100%;text-align:center;" } Page Stack Content
+    .stack.bar
+      .bar-content
+        .sample-bar
+          %ul.nav-items{ :style => "display:block;width:100%;background-color:white;margin-top:10px;" }
+            %li
+              %a{ :href => "page1.html" } Page One
+            %li
+              %a{ :href => "page2.html" } Page Two
+            %li
+              %a{ :href => "page3.html" } Page Three
+
+    /Included JS Files (Compressed)
+    %script{ :src => "javascripts/vendor/jquery-1.10.2.min.js" }
+    %script{ :src => "javascripts/vendor/snap.min.js"}
+    %script{ :src => "javascripts/vendor/focalCenter.js" }
+
+    / Custom Javascript
+    %script{ :src => "javascripts/script.js" }
+
+    :javascript
+      $(window).load(function() {
+        var snapper = new Snap({
+          element: $('.stack.page')[0]
+        });
+      });
