@@ -3,7 +3,7 @@ $(window).ready(function() {
   /**
   * Stacks initialization
   */
-  stacks();
+  $().stacks({'contentDirectory':'content-partials/'});
 
   /*
   * Write your custom application specific script here

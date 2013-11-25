@@ -114,20 +114,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 100%;
 }
 
-/* line 32, ../sass/_stacks.scss */
+/* line 31, ../sass/_stacks.scss */
+.stack.top-layer {
+  display: none;
+}
+/* line 33, ../sass/_stacks.scss */
 .stack.top-layer .top-layer-content {
   overflow-y: scroll;
   position: absolute;
   width: 100%;
   height: 100%;
 }
-/* line 37, ../sass/_stacks.scss */
+/* line 38, ../sass/_stacks.scss */
 .stack.top-layer .top-layer-content > div {
   position: absolute;
   width: 100%;
 }
 
-/* line 43, ../sass/_stacks.scss */
+/* line 44, ../sass/_stacks.scss */
 .stack.bar {
   position: relative;
   height: auto;
