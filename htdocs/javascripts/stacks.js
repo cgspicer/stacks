@@ -17,14 +17,22 @@
         'contentContainerClass' : 'page-content',
         'contentDirectory' : '/',
         'ajaxLoading' : true,
-        'snapjsOptions' : {}
+        'snapjsOptions' : {},
+        'snapOn' : []
 			}, options);
 
       $this = $(this);
 
       //initialize SnapJS
       var snapperOptions = Collect({ element: $(settings.pageStack)[0] },settings.snapjsOptions);
-      var snapper = new Snap(snapperOptions);
+      snapper = new Snap(snapperOptions);
+      if (settings.snapOn){
+        for(var i=0;i<settings.snapOn.length;i++){
+          $.each(settings.snapOn[0],function(hook,handler){
+            snapper.on(hook,handler);
+          });
+        }
+      }
 
       //set up navigation passthrough for url (based on http://css-tricks.com/rethinking-dynamic-page-replacing-content/ && http://diveintohtml5.info/history.html )
       if (Modernizr.history && settings.ajaxLoading ) {
@@ -52,24 +60,20 @@
           $pageStack.find('.'+settings.contentContainerClass).last().fadeOut(500,function(){$(this).remove();});
         });
       }
-
-
-
+      return $this;
 
 		}
 	};
 
   $.fn.stacks = function( method ) {
-
     // Method calling logic
-	if ( methods[method] ) {
-		return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-	} else if ( typeof method === 'object' || ! method ) {
-		return methods.init.apply( this, arguments );
-	} else {
-		$.error( 'Method ' +  method + ' does not exist on jQuery.stacks' );
-	}
-
+  	if ( methods[method] ) {
+  		return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+  	} else if ( typeof method === 'object' || ! method ) {
+  		return methods.init.apply( this, arguments );
+  	} else {
+  		$.error( 'Method ' +  method + ' does not exist on jQuery.stacks' );
+  	}
   };
 
 })( jQuery );
