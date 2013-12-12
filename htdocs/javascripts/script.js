@@ -7,7 +7,8 @@ $(window).ready(function() {
     'contentDirectory':'content-partials/',
     'snapOn':[
       {'animated':function(){
-        console.log(snapper.state());
+        snapperState = snapper.state();
+        setTimeout( function(){if ( snapperState.state === 'left' || snapperState.state === 'right' ) snapper.close()},100);
       }}
     ]
   });
